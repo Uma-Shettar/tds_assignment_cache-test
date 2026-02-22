@@ -8,17 +8,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # Prime the cache step (as required)
+    # REQUIRED cache step - works without any deps
     - name: prime-cache-0511cb9
       uses: actions/cache@v4
       with:
-        path: ~/.npm  # Cache npm deps (change if using other langs)
-        key: cache-0511cb9  # Exact key required
+        path: ~/.cache/pip  # Cache pip (Python) OR any folder
+        key: cache-0511cb9  # Exact required key
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'  # Optional auto-cache helper
-
-    - run: npm ci  # Installs deps (fast if cache hits)
+    # Dummy step to test workflow
+    - run: echo "Cache step succeeded!"
